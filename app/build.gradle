@@ -27,7 +27,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
-    implementation 'com.greedygame.sdkx:core:0.0.81'
+    implementation 'com.greedygame.sdkx:core:0.0.83'
     //Dependencies for sdkx
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation "androidx.palette:palette:1.0.0"
