@@ -15,7 +15,7 @@ import com.greedygame.core.interstitial.general.GGInterstitialEventsListener;
 
 public class SecondActivity extends AppCompatActivity {
     GGInterstitialAd ggInterstitialAd;
-    private boolean shouldShowAd = true;
+    private boolean shouldShowAd = false;
     private Button loadAdAgainButton;
     private InterstitialEventListener eventListener = new InterstitialEventListener();
     @Override
