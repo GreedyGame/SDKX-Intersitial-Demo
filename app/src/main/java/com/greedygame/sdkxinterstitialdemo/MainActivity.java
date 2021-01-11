@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private InterstitialEventListener eventListener = new InterstitialEventListener();
     private Button loadAdAgainButton;
+    private Button loadAd;
     private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +46,20 @@ public class MainActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar);
         loadAdAgainButton = findViewById(R.id.loadAdAgain);
+        loadAd = findViewById(R.id.loadAd);
         loadAdAgainButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 showAdAgain();
             }
         });
-
-        loadIntersitialAd();
+        loadAd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                loadIntersitialAd();
+            }
+        });
     }
 
     private void showAdAgain(){
