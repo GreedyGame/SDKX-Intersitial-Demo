@@ -22,10 +22,6 @@ import java.util.logging.Logger;
 public class MainActivity extends AppCompatActivity {
     GGInterstitialAd ggInterstitialAd;
 
-    private boolean shouldShowAd = true;
-    /*
-    Control the display of ads using shouldShowAd flag
-     */
 
     private InterstitialEventListener eventListener = new InterstitialEventListener();
     private Button loadAdAgainButton;
@@ -77,14 +73,14 @@ public class MainActivity extends AppCompatActivity {
             we  make the flag true and load the ad again, the ad will be shown automatically
             once it's loaded
              */
-            shouldShowAd = true;
             loadIntersitialAd();
         }
     }
 
     private void loadIntersitialAd(){
         progressBar.setVisibility(View.VISIBLE);
-        ggInterstitialAd.loadAd(eventListener);
+        ggInterstitialAd.setListener(eventListener);
+        ggInterstitialAd.loadAd();
     }
     class InterstitialEventListener implements GGInterstitialEventsListener{
         @Override
@@ -96,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
             // Setting flag to false to not show the ad again. This covers the case of opening
             // and ad that is already loaded
             Log.d("GGAD","Ad Closed - 1");
-            shouldShowAd = false;
             startActivity(new Intent(MainActivity.this,SecondActivity.class));
             finish();
         }
@@ -115,11 +110,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onAdLoaded() {
             progressBar.setVisibility(View.GONE);
-            if(shouldShowAd){
-                // Setting flag to false to not show the ad again.
-                shouldShowAd = false;
                 ggInterstitialAd.show();
-            }
 
         }
     }

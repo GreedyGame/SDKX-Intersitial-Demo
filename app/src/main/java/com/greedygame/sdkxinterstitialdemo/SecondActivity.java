@@ -15,7 +15,6 @@ import com.greedygame.core.interstitial.general.GGInterstitialEventsListener;
 
 public class SecondActivity extends AppCompatActivity {
     GGInterstitialAd ggInterstitialAd;
-    private boolean shouldShowAd = false;
     private Button loadAdAgainButton;
     private InterstitialEventListener eventListener = new InterstitialEventListener();
     @Override
@@ -30,31 +29,22 @@ public class SecondActivity extends AppCompatActivity {
                 showAdAgain();
             }
         });
-        loadIntersitialAd();
+
     }
 
 
     private void showAdAgain(){
         if(ggInterstitialAd.isAdLoaded()){
-            /*
-             SDKX automatically refresh the ad automatically when ad is closed. If its already
-             loaded, we show it here.
-             */
             ggInterstitialAd.show();
         }
         else{
-            /*
-            Incase the ad is not loaded by the time this function is called again,
-            we  make the flag true and load the ad again, the ad will be shown automatically
-            once it's loaded
-             */
-            shouldShowAd = true;
             loadIntersitialAd();
         }
     }
 
     private void loadIntersitialAd(){
-        ggInterstitialAd.loadAd(eventListener);
+        ggInterstitialAd.setListener(eventListener);
+        ggInterstitialAd.loadAd();
     }
 
 
@@ -69,7 +59,6 @@ public class SecondActivity extends AppCompatActivity {
             // Setting flag to false to not show the ad again. This covers the case of opening
             // and ad that is already loaded
             Log.d("GGAD","Ad Closed - 2");
-            shouldShowAd = false;
             startActivity(new Intent(SecondActivity.this,MainActivity.class));
             finish();
         }
@@ -86,12 +75,7 @@ public class SecondActivity extends AppCompatActivity {
         }
         @Override
         public void onAdLoaded() {
-            if(shouldShowAd){
-                // Setting flag to false to not show the ad again.
-                shouldShowAd = false;
                 ggInterstitialAd.show();
-            }
-
         }
     }
 }
