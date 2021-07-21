@@ -12,11 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.greedygame.core.AppConfig;
 import com.greedygame.core.GreedyGameAds;
-import com.greedygame.core.adview.modals.AdRequestErrors;
+import com.greedygame.core.app_open_ads.general.AdOrientation;
+import com.greedygame.core.app_open_ads.general.AppOpenAdsEventsListener;
+import com.greedygame.core.app_open_ads.general.GGAppOpenAds;
 import com.greedygame.core.interstitial.general.GGInterstitialAd;
 import com.greedygame.core.interstitial.general.GGInterstitialEventsListener;
-
-import java.util.logging.Logger;
+import com.greedygame.core.models.general.AdErrors;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -36,8 +37,38 @@ public class MainActivity extends AppCompatActivity {
          */
         AppConfig appConfig = new AppConfig.Builder(this)
                 .withAppId("89221032")
+                .enableFacebookAds(true)
                 .build();
         GreedyGameAds.initWith(appConfig,null);
+        GGAppOpenAds.setListener(new AppOpenAdsEventsListener() {
+
+            @Override
+            public void onAdShowFailed(){
+
+            }
+            @Override
+            public void onAdLoaded(){
+                GGAppOpenAds.show();
+            }
+
+            @Override
+            public void onAdLoadFailed(AdErrors cause){
+
+            }
+
+            @Override
+            public void onAdOpened(){
+
+            }
+
+            @Override
+            public void onAdClosed(){
+
+            }
+        });
+
+        GGAppOpenAds.setOrientation(AdOrientation.PORTRAIT);
+        GGAppOpenAds.loadAd("float-test_appopen");
         ggInterstitialAd  = new GGInterstitialAd(this,"float-4839");
 
         progressBar = findViewById(R.id.progressBar);
@@ -83,10 +114,12 @@ public class MainActivity extends AppCompatActivity {
         ggInterstitialAd.loadAd();
     }
     class InterstitialEventListener implements GGInterstitialEventsListener{
+
         @Override
-        public void onAdLeftApplication() {
+        public void onAdShowFailed() {
 
         }
+
         @Override
         public void onAdClosed() {
             // Setting flag to false to not show the ad again. This covers the case of opening
@@ -101,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         @Override
-        public void onAdLoadFailed(AdRequestErrors cause) {
+        public void onAdLoadFailed(AdErrors cause) {
             progressBar.setVisibility(View.GONE);
             Toast.makeText(MainActivity.this, "Ad Load failed "+cause.toString(), Toast.LENGTH_SHORT).show();
             //Called when the ad load failed. The reason is available in cause variable

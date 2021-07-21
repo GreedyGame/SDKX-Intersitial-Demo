@@ -9,9 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.greedygame.core.adview.modals.AdRequestErrors;
 import com.greedygame.core.interstitial.general.GGInterstitialAd;
 import com.greedygame.core.interstitial.general.GGInterstitialEventsListener;
+import com.greedygame.core.models.general.AdErrors;
 
 public class SecondActivity extends AppCompatActivity {
     GGInterstitialAd ggInterstitialAd;
@@ -51,8 +51,8 @@ public class SecondActivity extends AppCompatActivity {
 
     class InterstitialEventListener implements GGInterstitialEventsListener {
         @Override
-        public void onAdLeftApplication() {
-
+        public void onAdShowFailed() {
+            Log.d("GGAD","Ad Show failed");
         }
         @Override
         public void onAdClosed() {
@@ -68,7 +68,7 @@ public class SecondActivity extends AppCompatActivity {
 
         }
         @Override
-        public void onAdLoadFailed(AdRequestErrors cause) {
+        public void onAdLoadFailed(AdErrors cause) {
             Toast.makeText(SecondActivity.this, "Ad Load failed "+cause.toString(), Toast.LENGTH_SHORT).show();
             //Called when the ad load failed. The reason is available in cause variable
 
