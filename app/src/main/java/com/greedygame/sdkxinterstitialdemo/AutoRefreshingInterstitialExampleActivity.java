@@ -59,7 +59,7 @@ public class AutoRefreshingInterstitialExampleActivity extends AppCompatActivity
             // Setting flag to false to not show the ad again. This covers the case of opening
             // and ad that is already loaded
             Log.d("GGAD","Ad Closed");
-            ggInterstitialAd.loadAd();
+            ggInterstitialAd.loadAd(); // used to auto-refresh
         }
         @Override
         public void onAdOpened() {
