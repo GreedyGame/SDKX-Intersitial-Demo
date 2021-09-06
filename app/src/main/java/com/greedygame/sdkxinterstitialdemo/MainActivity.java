@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         public void onAdClosed() {
             // Setting flag to false to not show the ad again. This covers the case of opening
             // and ad that is already loaded
+            ggInterstitialAd.loadAd(); // Add this to auto refresh the Interstitial Ad
             Log.d("GGAD","Ad Closed - 1");
             startActivity(new Intent(MainActivity.this,SecondActivity.class));
             finish();
