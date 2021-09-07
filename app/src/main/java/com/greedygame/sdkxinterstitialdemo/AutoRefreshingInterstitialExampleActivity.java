@@ -17,6 +17,7 @@ public class AutoRefreshingInterstitialExampleActivity extends AppCompatActivity
     GGInterstitialAd ggInterstitialAd;
     private Button showAd;
     private InterstitialEventListener eventListener = new InterstitialEventListener();
+    boolean onAdload = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +46,9 @@ public class AutoRefreshingInterstitialExampleActivity extends AppCompatActivity
     private void loadIntersitialAd(){
         ggInterstitialAd.setListener(eventListener);
         ggInterstitialAd.loadAd();
+        onAdload = true;
     }
+
 
 
 
@@ -60,6 +63,7 @@ public class AutoRefreshingInterstitialExampleActivity extends AppCompatActivity
             // and ad that is already loaded
             Log.d("GGAD","Ad Closed");
             ggInterstitialAd.loadAd(); // used to auto-refresh
+            onAdload = false;
         }
         @Override
         public void onAdOpened() {
@@ -74,6 +78,9 @@ public class AutoRefreshingInterstitialExampleActivity extends AppCompatActivity
         }
         @Override
         public void onAdLoaded() {
+            if(onAdload == true){
+                ggInterstitialAd.show();
+            }
         }
     }
 }
