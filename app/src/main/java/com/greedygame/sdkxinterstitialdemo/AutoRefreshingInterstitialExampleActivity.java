@@ -63,7 +63,6 @@ public class AutoRefreshingInterstitialExampleActivity extends AppCompatActivity
             // and ad that is already loaded
             Log.d("GGAD","Ad Closed");
             ggInterstitialAd.loadAd(); // used to auto-refresh
-            shouldShowAd = false;
         }
         @Override
         public void onAdOpened() {
@@ -79,6 +78,7 @@ public class AutoRefreshingInterstitialExampleActivity extends AppCompatActivity
         @Override
         public void onAdLoaded() {
             if(shouldShowAd == true){
+                shouldShowAd = false;
                 ggInterstitialAd.show();
             }
         }
