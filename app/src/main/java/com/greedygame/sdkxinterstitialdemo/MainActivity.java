@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private Button loadAdAgainButton;
     private Button loadAd;
     private ProgressBar progressBar;
+    private  Button autoRefreshExampleButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +75,13 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         loadAdAgainButton = findViewById(R.id.loadAdAgain);
         loadAd = findViewById(R.id.loadAd);
+        autoRefreshExampleButton = findViewById(R.id.autorefreshexample);
+        autoRefreshExampleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,AutoRefreshingInterstitialExampleActivity.class));
+            }
+        });
         loadAdAgainButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
